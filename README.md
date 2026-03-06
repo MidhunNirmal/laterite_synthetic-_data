@@ -221,6 +221,4 @@ Key dependencies:
 ## Citation / Context
 
 This project is part of a research study evaluating synthetic tabular data generation methods for geotechnical laterite datasets with limited sample sizes. The KDE-Copula GAN model is a custom architecture designed to better preserve the marginal distributions and inter-feature correlations characteristic of geotechnical data.
-#   l a t e r i t e _ s y n t h e t i c - _ d a t a  
- #   l a t e r i t e _ s y n t h e t i c - _ d a t a  
- 
+#   l a t e r i t e _ s y n t h e t i c - _ d a t a 

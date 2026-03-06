@@ -1,0 +1,55 @@
+# KDE-Copula GAN Configuration for Laterite Dataset
+
+# Model hyperparameters
+epochs: 300
+batch_size: 32  # Small batch size due to small dataset
+learning_rate: 0.0002
+
+# GAN architecture (WGAN-GP)
+noise_dim: 128
+generator_dim: [256, 256, 256]
+discriminator_dim: [256, 256, 256]
+discriminator_steps: 5
+gradient_penalty_weight: 10.0
+
+# KDE settings
+kde:
+  bandwidth: silverman
+  grid_points: 1000
+  tail_clip: 0.001
+
+# Copula settings
+copula:
+  regularization: 1e-6
+
+# Data configuration
+data:
+  # Numerical columns from imputed_missforest.csv
+  numerical_columns:
+    - Specific Gravity
+    - Gravel %
+    - Sand %
+    - Silt %
+    - Clay %
+    - Liquid Limit %
+    - Plastic Limit %
+    - Plasticity Index %
+    - OMC %
+    - MDD kN/m3
+    - CBR % UnSoaked
+    - CBR % Soaked
+    - wPI
+  
+  # Categorical columns
+  categorical_columns:
+    - Location
+    - Soil Classification
+
+# Paths
+paths:
+  input_data: ../imputed_missforest.csv
+  output_model: laterite_kdecopula_model.pkl
+  output_synthetic: laterite_synthetic.csv
+
+# Random seed
+random_seed: 42
