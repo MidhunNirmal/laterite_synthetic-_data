@@ -1,0 +1,63 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# IDEs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs & reports (auto-generated)
+*.log
+output.txt
+dup_analysis.txt
+error_log.txt
+error_output.txt
+gen_error.txt
+
+# Large model files
+*.pkl
+*.pt
+*.pth
+*.ckpt
+*.h5
+
+# CSV data files
+*.csv
+
+# Temporary / debug files
+kdecopula_laterite/test_copula.py
+kdecopula_laterite/test_data.py
+kdecopula_laterite/test_detailed.py
+kdecopula_laterite/test_kde_simple.py
+debug_dups.py
+check_dups.py
+final_test.py
+
+# Environment / secrets
+.env
+*.env
