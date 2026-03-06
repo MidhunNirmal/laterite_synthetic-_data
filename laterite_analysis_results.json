@@ -1,0 +1,418 @@
+{
+  "structural": {
+    "n_rows": 53,
+    "n_columns": 16,
+    "columns": [
+      "Sl. No",
+      "Location",
+      "Specific Gravity",
+      "Gravel %",
+      "Sand %",
+      "Silt %",
+      "Clay %",
+      "Liquid Limit %",
+      "Plastic Limit %",
+      "Plasticity Index %",
+      "OMC %",
+      "MDD kN/m3",
+      "CBR % UnSoaked",
+      "CBR % Soaked",
+      "wPI",
+      "Soil Classification"
+    ],
+    "n_duplicate_rows": 0,
+    "numeric_columns": [
+      "Specific Gravity",
+      "Gravel %",
+      "Sand %",
+      "Silt %",
+      "Clay %",
+      "Liquid Limit %",
+      "Plastic Limit %",
+      "Plasticity Index %",
+      "OMC %",
+      "MDD kN/m3",
+      "CBR % UnSoaked",
+      "CBR % Soaked",
+      "wPI"
+    ],
+    "categorical_columns": [
+      "Sl. No",
+      "Location"
+    ]
+  },
+  "scenario": {
+    "scenarios": [
+      "MI",
+      "SM",
+      "MH",
+      "SM-SC",
+      "ML",
+      "SW",
+      "SC",
+      "SW-SM",
+      "SP-SM",
+      "SC-GM",
+      "SM-GC",
+      "SC - GC",
+      "SM-CI",
+      "GM-SC",
+      "GM-GC",
+      "GC-SM"
+    ],
+    "n_scenarios": 16,
+    "percent_significant_tests": 49.333333333333336,
+    "recommendation": "DO NOT POOL - separate by scenario"
+  },
+  "statistical": {
+    "Specific Gravity": {
+      "count": 45,
+      "min": 2.221,
+      "max": 2.8,
+      "mean": 2.622155555555556,
+      "median": 2.68,
+      "std": 0.16148486497551895,
+      "skewness": -1.0000777910217602,
+      "kurtosis": -0.22545932142881187,
+      "characteristics": [
+        "highly_skewed"
+      ]
+    },
+    "Gravel %": {
+      "count": 48,
+      "min": 2.0,
+      "max": 55.0,
+      "mean": 21.163958333333333,
+      "median": 21.7,
+      "std": 10.831436269387426,
+      "skewness": 0.7577092201662918,
+      "kurtosis": 1.231098173100511,
+      "characteristics": []
+    },
+    "Sand %": {
+      "count": 53,
+      "min": 21.0,
+      "max": 89.6,
+      "mean": 54.69679245283019,
+      "median": 50.85,
+      "std": 15.159168560210189,
+      "skewness": 0.31255184412154347,
+      "kurtosis": -0.2957291831073694,
+      "characteristics": []
+    },
+    "Silt %": {
+      "count": 52,
+      "min": 1.5,
+      "max": 52.0,
+      "mean": 16.988461538461536,
+      "median": 14.5,
+      "std": 11.29687886526765,
+      "skewness": 0.8989777172127204,
+      "kurtosis": 0.3930158362894942,
+      "characteristics": []
+    },
+    "Clay %": {
+      "count": 34,
+      "min": 4.0,
+      "max": 43.0,
+      "mean": 14.729411764705883,
+      "median": 14.0,
+      "std": 6.854661294453256,
+      "skewness": 2.1197862490706223,
+      "kurtosis": 6.925842678020402,
+      "characteristics": [
+        "highly_skewed",
+        "heavy_tailed"
+      ]
+    },
+    "Liquid Limit %": {
+      "count": 50,
+      "min": 20.0,
+      "max": 58.8,
+      "mean": 36.756,
+      "median": 36.0,
+      "std": 8.745428193388491,
+      "skewness": 0.5055553213708105,
+      "kurtosis": 0.1149347418633937,
+      "characteristics": []
+    },
+    "Plastic Limit %": {
+      "count": 50,
+      "min": 10.0,
+      "max": 47.2,
+      "mean": 22.791999999999998,
+      "median": 21.5,
+      "std": 9.118423601675447,
+      "skewness": 0.6448378656580844,
+      "kurtosis": -0.3673681915357636,
+      "characteristics": []
+    },
+    "Plasticity Index %": {
+      "count": 47,
+      "min": 3.2,
+      "max": 31.7,
+      "mean": 15.75531914893617,
+      "median": 15.0,
+      "std": 6.9769436597060395,
+      "skewness": 0.22949453328302902,
+      "kurtosis": -0.7832662367644172,
+      "characteristics": []
+    },
+    "OMC %": {
+      "count": 47,
+      "min": 9.9,
+      "max": 36.5,
+      "mean": 16.5863829787234,
+      "median": 16.0,
+      "std": 4.285495976334856,
+      "skewness": 2.0707956858155385,
+      "kurtosis": 8.122183005131802,
+      "characteristics": [
+        "highly_skewed",
+        "heavy_tailed"
+      ]
+    },
+    "MDD kN/m3": {
+      "count": 47,
+      "min": 0.15,
+      "max": 2.39,
+      "mean": 1.7835319148936175,
+      "median": 1.75,
+      "std": 0.32479055800314244,
+      "skewness": -2.4641182938224895,
+      "kurtosis": 11.881972375535929,
+      "characteristics": [
+        "highly_skewed",
+        "heavy_tailed"
+      ]
+    },
+    "CBR % UnSoaked": {
+      "count": 53,
+      "min": 8.45,
+      "max": 142.0,
+      "mean": 19.663188679245284,
+      "median": 14.25,
+      "std": 19.998892629974637,
+      "skewness": 4.821848038644116,
+      "kurtosis": 25.45949097595377,
+      "characteristics": [
+        "highly_skewed",
+        "heavy_tailed"
+      ]
+    },
+    "CBR % Soaked": {
+      "count": 27,
+      "min": 3.7,
+      "max": 24.014,
+      "mean": 11.385666666666667,
+      "median": 10.188,
+      "std": 5.112984067736089,
+      "skewness": 0.2769166491111684,
+      "kurtosis": -0.5407811588945837,
+      "characteristics": []
+    },
+    "wPI": {
+      "count": 10,
+      "min": 0.91,
+      "max": 12.18,
+      "mean": 4.103,
+      "median": 3.43,
+      "std": 3.2256095031275356,
+      "skewness": 1.6120090519664705,
+      "kurtosis": 2.0796689623352123,
+      "characteristics": [
+        "highly_skewed"
+      ]
+    },
+    "scale_ratio": 230.65630397236626,
+    "scale_compatibility": "incompatible"
+  },
+  "missing_data": {
+    "missing_summary": {
+      "Specific Gravity": {
+        "count": 8,
+        "percentage": 15.09433962264151
+      },
+      "Gravel %": {
+        "count": 5,
+        "percentage": 9.433962264150944
+      },
+      "Clay %": {
+        "count": 19,
+        "percentage": 35.84905660377358
+      },
+      "Liquid Limit %": {
+        "count": 3,
+        "percentage": 5.660377358490567
+      },
+      "Plastic Limit %": {
+        "count": 3,
+        "percentage": 5.660377358490567
+      },
+      "Plasticity Index %": {
+        "count": 0,
+        "percentage": 0.0
+      },
+      "OMC %": {
+        "count": 6,
+        "percentage": 11.320754716981133
+      },
+      "MDD kN/m3": {
+        "count": 6,
+        "percentage": 11.320754716981133
+      },
+      "CBR % Soaked": {
+        "count": 26,
+        "percentage": 49.056603773584904
+      },
+      "wPI": {
+        "count": 43,
+        "percentage": 81.13207547169812
+      }
+    },
+    "handling_strategy": {
+      "Specific Gravity": {
+        "action": "IMPUTE_KNN",
+        "reason": "Moderate missingness - KNN imputation"
+      },
+      "Gravel %": {
+        "action": "IMPUTE_MEDIAN",
+        "reason": "Low missingness - median imputation"
+      },
+      "Clay %": {
+        "action": "RETAIN_AS_CATEGORY",
+        "reason": "Substantial missingness - treat as informative"
+      },
+      "Liquid Limit %": {
+        "action": "IMPUTE_MEDIAN",
+        "reason": "Low missingness - median imputation"
+      },
+      "Plastic Limit %": {
+        "action": "REPLACE_WITH_ZERO",
+        "reason": "NP (Non-Plastic) means zero plasticity"
+      },
+      "Plasticity Index %": {
+        "action": "REPLACE_WITH_ZERO",
+        "reason": "NP (Non-Plastic) means zero plasticity"
+      },
+      "OMC %": {
+        "action": "IMPUTE_KNN",
+        "reason": "Moderate missingness - KNN imputation"
+      },
+      "MDD kN/m3": {
+        "action": "IMPUTE_KNN",
+        "reason": "Moderate missingness - KNN imputation"
+      },
+      "CBR % Soaked": {
+        "action": "RETAIN_AS_CATEGORY",
+        "reason": "Substantial missingness - treat as informative"
+      },
+      "wPI": {
+        "action": "DROP_COLUMN",
+        "reason": "More than 50% missing - insufficient data"
+      }
+    }
+  },
+  "outliers": {
+    "Specific Gravity": {
+      "n_outliers": 2,
+      "pct_outliers": 4.444444444444445,
+      "bounds": {
+        "lower": 2.2750000000000004,
+        "upper": 3.035
+      },
+      "classification": "NATURAL_VARIATION",
+      "treatment": "RETAIN"
+    },
+    "Gravel %": {
+      "n_outliers": 2,
+      "pct_outliers": 4.166666666666666,
+      "bounds": {
+        "lower": -2.125,
+        "upper": 42.875
+      },
+      "classification": "NATURAL_VARIATION",
+      "treatment": "RETAIN"
+    },
+    "Sand %": {
+      "n_outliers": 0,
+      "pct_outliers": 0.0,
+      "bounds": {
+        "lower": 16.0,
+        "upper": 96.0
+      },
+      "classification": "NATURAL_VARIATION",
+      "treatment": "RETAIN"
+    },
+    "Silt %": {
+      "n_outliers": 1,
+      "pct_outliers": 1.9230769230769231,
+      "bounds": {
+        "lower": -15.0625,
+        "upper": 47.4375
+      },
+      "classification": "NATURAL_VARIATION",
+      "treatment": "RETAIN"
+    },
+    "Clay %": {
+      "n_outliers": 2,
+      "pct_outliers": 5.88235294117647,
+      "bounds": {
+        "lower": 3.0,
+        "upper": 25.0
+      },
+      "classification": "NATURAL_VARIATION",
+      "treatment": "RETAIN"
+    },
+    "Liquid Limit %": {
+      "n_outliers": 0,
+      "pct_outliers": 0.0,
+      "bounds": {
+        "lower": 12.887499999999996,
+        "upper": 59.18750000000001
+      },
+      "classification": "NATURAL_VARIATION",
+      "treatment": "RETAIN"
+    },
+    "Plastic Limit %": {
+      "n_outliers": 0,
+      "pct_outliers": 0.0,
+      "bounds": {
+        "lower": -3.1750000000000043,
+        "upper": 48.62500000000001
+      },
+      "classification": "NATURAL_VARIATION",
+      "treatment": "RETAIN"
+    },
+    "Plasticity Index %": {
+      "n_outliers": 0,
+      "pct_outliers": 0.0,
+      "bounds": {
+        "lower": -5.624999999999998,
+        "upper": 37.775
+      },
+      "classification": "NATURAL_VARIATION",
+      "treatment": "RETAIN"
+    },
+    "OMC %": {
+      "n_outliers": 1,
+      "pct_outliers": 2.127659574468085,
+      "bounds": {
+        "lower": 8.249999999999996,
+        "upper": 24.650000000000002
+      },
+      "classification": "NATURAL_VARIATION",
+      "treatment": "RETAIN"
+    },
+    "MDD kN/m3": {
+      "n_outliers": 1,
+      "pct_outliers": 2.127659574468085,
+      "bounds": {
+        "lower": 1.1925000000000001,
+        "upper": 2.4524999999999997
+      },
+      "classification": "NATURAL_VARIATION",
+      "treatment": "RETAIN"
+    }
+  }
+}
