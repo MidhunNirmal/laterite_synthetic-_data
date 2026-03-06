@@ -1,31 +1,46 @@
 # Laterite Synthetic Data Generation
 
-A research pipeline for generating high-fidelity synthetic tabular data from real-world laterite (soil/geotechnical) datasets using multiple generative models: **CTGAN**, **TVAE**, **KDE-Copula GAN**, and **Tabular DDPM (Diffusion Model)**.
+> Generating high-fidelity synthetic tabular data from a small real-world geotechnical (laterite soil) dataset using multiple generative models.
 
 ---
 
-## Project Overview
+## Table of Contents
 
-This project addresses the challenge of limited geotechnical sample sizes by producing statistically faithful synthetic data. The pipeline covers:
+- [Overview](#overview)
+- [Dataset](#dataset)
+- [Project Structure](#project-structure)
+- [Models](#models)
+- [Setup](#setup)
+- [Usage](#usage)
+- [Evaluation](#evaluation)
+- [Results](#results)
 
-1. **Deep statistical analysis** of the raw laterite dataset
-2. **Evidence-based preprocessing** (imputation, normalization, encoding)
-3. **Multi-model synthetic generation** with comparative evaluation
-4. **Rigorous validation** using KS tests, Wasserstein distances, VIF analysis, and correlation preservation
+---
+
+## Overview
+
+Geotechnical datasets are often small and hard to collect. This project builds a reproducible pipeline to:
+
+1. Deeply analyze and preprocess a real laterite soil dataset
+2. Generate synthetic samples using four generative models
+3. Evaluate synthetic data fidelity using statistical metrics
+
+**Models compared:** CTGAN · TVAE · KDE-Copula GAN (custom) · Tabular DDPM
 
 ---
 
 ## Dataset
 
-| Property | Value |
+| Property | Detail |
 |---|---|
-| Source file | `laterite.csv` |
-| Rows | 53 samples |
-| Columns | 16 features (13 numeric, 2 categorical) |
-| Scenarios | 16 soil classifications (e.g., MI, SM, MH, SC, GM-GC, …) |
-| Preprocessed output | `laterite_preprocessed.csv` |
+| File | `laterite.csv` |
+| Samples | 53 rows |
+| Features | 16 (13 numeric, 2 categorical) |
+| Soil classifications | 16 scenarios (MI, SM, MH, SC, GM-GC, …) |
 
-Key soil properties: Specific Gravity, Gravel %, Sand %, Silt %, Clay %, Liquid Limit, Plastic Limit, Plasticity Index, OMC %, MDD kN/m³, CBR %, Soil Classification.
+**Soil properties:** Specific Gravity, Gravel %, Sand %, Silt %, Clay %, Liquid Limit %, Plastic Limit %, Plasticity Index %, OMC %, MDD kN/m³, CBR %, Soil Classification.
+
+> ⚠️ CSV files are excluded from version control via `.gitignore`. Place `laterite.csv` in the root directory before running.
 
 ---
 
@@ -34,191 +49,143 @@ Key soil properties: Specific Gravity, Gravel %, Sand %, Silt %, Clay %, Liquid 
 ```
 laterite/
 │
-├── laterite.csv                          # Raw dataset
-├── laterite_preprocessed.csv             # Preprocessed dataset (final input to models)
+├── laterite.csv                          # Raw dataset (not tracked)
+├── laterite_preprocessed.csv             # Preprocessed output (not tracked)
 │
 ├── laterite_preprocessing.py             # Preprocessing pipeline
-├── laterite_analysis.py                  # Full deep-dive statistical analysis
-├── laterite_analysis_simple.py           # Simplified analysis script
-├── laterite_analysis.log                 # Structured decision log
-├── laterite_analysis_results.json        # Machine-readable analysis output
-├── laterite_synthetic_data_readiness_report.md  # Readiness report
+├── laterite_analysis.py                  # Full statistical analysis
+├── laterite_analysis_simple.py           # Simplified analysis
+├── laterite_analysis_results.json        # Analysis output
+├── laterite_synthetic_data_readiness_report.md
 │
-├── advanced_imputation.py                # Advanced missing-value imputation (KNN, MICE, MissForest)
-├── imputed_knn.csv                       # KNN-imputed dataset
-├── imputed_mice.csv                      # MICE-imputed dataset
-├── imputed_missforest.csv                # MissForest-imputed dataset
+├── advanced_imputation.py                # KNN / MICE / MissForest imputation
+├── verify_imputation.py                  # Imputation quality checks
 │
-├── ctgan_imputation.py                   # CTGAN training & synthetic generation
-├── generate_ctgan_500.py                 # Generate 500 CTGAN synthetic samples
-├── ctgan_synthetic_500.csv               # CTGAN synthetic output (500 rows)
-├── cT_gan.csv                            # CTGAN auxiliary dataset
+├── ctgan_imputation.py                   # CTGAN training
+├── generate_ctgan_500.py                 # CTGAN synthetic generation (500 samples)
 │
-├── kdecopula_laterite/                   # KDE-Copula GAN model (custom implementation)
+├── kdecopula_laterite/                   # KDE-Copula GAN (custom model)
+│   ├── config.yaml                       # Hyperparameters
 │   ├── train_laterite.py                 # Training entry point
-│   ├── trainer.py                        # Training loop & loss management
+│   ├── generate_laterite.py              # Synthetic generation
+│   ├── trainer.py                        # WGAN-GP training loop
 │   ├── generator.py                      # Generator network
 │   ├── discriminator.py                  # Discriminator network
-│   ├── gaussian_copula.py                # Gaussian copula transformation layer
-│   ├── mixed_kde_encoder.py              # Mixed KDE encoder for numeric/categorical columns
-│   ├── categorical_encoder.py            # Categorical feature encoder
-│   ├── generate_laterite.py              # Inference / synthetic generation script
-│   ├── config.yaml                       # Model hyperparameters
-│   ├── laterite_kdecopula_model.pkl      # Saved KDE-Copula GAN model
-│   ├── laterite_synthetic.csv            # KDE-Copula synthetic output (small)
-│   └── my_synthetic.csv                  # KDE-Copula synthetic output (full)
+│   ├── gaussian_copula.py                # Gaussian copula layer
+│   ├── mixed_kde_encoder.py              # Mixed KDE encoder
+│   └── categorical_encoder.py            # Categorical feature encoder
 │
-├── comparison/                           # Cross-model evaluation
-│   ├── compare_datasets.py               # Evaluation script (KS, Wasserstein, VIF)
-│   ├── distance_metrics.csv              # KS / Wasserstein per feature (core models)
-│   ├── distance_metrics_full.csv         # KS / Wasserstein per feature (all models)
-│   ├── distribution_comparison.png       # Univariate distribution overlay plots
-│   ├── boxplot_comparison.png            # Box plots per model
-│   ├── correlation_comparison.png        # Correlation matrix heatmaps
-│   ├── qq_plots.png                      # Q-Q plots
-│   └── …                                 # Additional plots
+├── comparison/
+│   ├── compare_datasets.py               # Statistical comparison across models
+│   └── plots/                            # Generated plots
 │
-├── report_of_laterite.md                 # Comprehensive research report
-├── report_of_laterite.pdf                # PDF version of the report
-└── prompt.txt                            # Analysis prompt specification
+├── report_of_laterite.md                 # Full research report
+├── report_of_laterite.pdf
+├── requirements.txt
+└── .gitignore
 ```
 
 ---
 
 ## Models
 
-### 1. CTGAN
-Conditional Tabular GAN. Uses mode-specific normalization and a conditional generator to handle mixed-type tabular data.
+### CTGAN
+Conditional Tabular GAN with mode-specific normalization. Standard baseline for synthetic tabular data generation.
 
-- Script: `ctgan_imputation.py`, `generate_ctgan_500.py`
-- Output: `ctgan_synthetic_500.csv`
+### TVAE
+Tabular Variational Autoencoder. More stable than CTGAN on small datasets.
 
-### 2. TVAE
-Tabular Variational Autoencoder. Preferred over CTGAN for small datasets (<100 rows) due to stable latent space learning.
+### KDE-Copula GAN *(custom)*
+A three-stage hybrid model:
+1. **Mixed KDE Encoder** — models each feature's marginal distribution via kernel density estimation
+2. **Gaussian Copula** — captures inter-feature dependency structure
+3. **WGAN-GP** — adversarially refines samples in copula space
 
-### 3. KDE-Copula GAN *(custom)*
-A hybrid model combining:
-- **Mixed KDE Encoder** to model marginal distributions of each feature
-- **Gaussian Copula** to capture inter-feature dependency structure
-- **Adversarial training** (GAN) to refine synthetic fidelity
+Architecture: `noise_dim=128`, `generator/discriminator=[256, 256, 256]`, `lr=0.0002`, `epochs=300`
 
-- Entry point: `kdecopula_laterite/train_laterite.py`
-- Config: `kdecopula_laterite/config.yaml`
-- Generation: `kdecopula_laterite/generate_laterite.py`
-
-### 4. Tabular DDPM (Diffusion Model)
-MLP-based Denoising Diffusion Probabilistic Model adapted for tabular data. Generates samples by iteratively denoising from Gaussian noise.
+### Tabular DDPM
+MLP-based Denoising Diffusion Probabilistic Model adapted for tabular data.
 
 ---
 
-## Preprocessing Pipeline
+## Setup
 
-Run preprocessing before any model training:
+```bash
+pip install -r requirements.txt
+```
+
+**Key dependencies:**
+
+| Package | Purpose |
+|---|---|
+| `sdv`, `ctgan` | CTGAN & TVAE generation |
+| `torch` | KDE-Copula GAN & Diffusion Model |
+| `scikit-learn` | Preprocessing & KNN imputation |
+| `scipy` | KS tests, Wasserstein distance |
+| `matplotlib`, `seaborn` | Visualisation |
+| `pyyaml` | Model config parsing |
+
+---
+
+## Usage
+
+### 1. Preprocess
 
 ```bash
 python laterite_preprocessing.py
 ```
 
-Steps applied (evidence-based, not heuristic):
+Applies evidence-based preprocessing: NP → 0 substitution, KNN/median imputation, StandardScaler normalization, label encoding.
 
-| Step | Action |
-|---|---|
-| Special values | Replace `'NP'` → `0` for plasticity columns |
-| High-missingness columns | Drop columns with >50% missing (e.g., `wPI`) |
-| KNN imputation | `Specific Gravity`, `OMC %`, `MDD kN/m³` (11–15% missing) |
-| Median imputation | `Gravel %`, `Liquid Limit %` (<10% missing) |
-| Category retention | `Clay %` (35.8% missing), `CBR %` (49.1% missing) |
-| Normalization | `StandardScaler` (scale ratio = 230×) |
-| Encoding | Label encoding for soil classifications |
-
-Advanced imputation alternatives (KNN, MICE, MissForest):
+Advanced imputation (KNN · MICE · MissForest):
 
 ```bash
 python advanced_imputation.py
 ```
 
----
+### 2. Train Models
 
-## Running the Models
-
-### CTGAN
-
+**CTGAN:**
 ```bash
 python ctgan_imputation.py
 python generate_ctgan_500.py
 ```
 
-### KDE-Copula GAN
+**KDE-Copula GAN:**
+```bash
+cd kdecopula_laterite
+python train_laterite.py      # Trains and saves model to laterite_kdecopula_model.pkl
+python generate_laterite.py   # Loads model and generates synthetic samples
+```
+
+### 3. Compare Models
 
 ```bash
-# Train
-python kdecopula_laterite/train_laterite.py
-
-# Generate synthetic samples
-python kdecopula_laterite/generate_laterite.py
+python comparison/compare_datasets.py
 ```
 
 ---
 
 ## Evaluation
 
-Run the comparative evaluation across all models:
+Metrics computed per model:
 
-```bash
-python comparison/compare_datasets.py
-```
+- **KS Statistic** — per-feature distributional similarity (lower = better)
+- **Wasserstein Distance** — distributional shift magnitude (lower = better)
+- **VIF** — multicollinearity preservation
+- **Correlation matrix** — pairwise feature relationship preservation
 
-Metrics computed:
-- **KS Statistic** — univariate distributional similarity (per feature)
-- **Wasserstein Distance** — distributional shift magnitude
-- **VIF (Variance Inflation Factor)** — multicollinearity preservation
-- **Correlation matrix** comparison
-- **Q-Q plots** and boxplots per model
+Results saved to `comparison/distance_metrics_full.csv`.
 
 ---
 
-## Key Findings
+## Results
 
-| Model | Avg. KS Stat ↓ | Avg. Wasserstein ↓ | Multicollinearity |
+| Model | Avg. KS Stat ↓ | Wasserstein ↓ | Multicollinearity |
 |---|---|---|---|
-| KDE-Copula GAN | Best | Best | Well-preserved |
+| KDE-Copula GAN | **Best** | **Best** | Well-preserved |
 | TVAE | Good | Good | Moderate |
-| CTGAN | Moderate | Moderate | Partially lost |
 | Tabular DDPM | Moderate | Moderate | Moderate |
+| CTGAN | Moderate | Moderate | Partially lost |
 
-> Full results in `comparison/distance_metrics_full.csv` and `report_of_laterite.md`.
-
----
-
-## Reports
-
-| File | Description |
-|---|---|
-| [`laterite_synthetic_data_readiness_report.md`](laterite_synthetic_data_readiness_report.md) | Pre-training readiness assessment |
-| [`report_of_laterite.md`](report_of_laterite.md) | Full research report with all model results |
-| [`report_of_laterite.pdf`](report_of_laterite.pdf) | PDF version of the full report |
-
----
-
-## Requirements
-
-```bash
-pip install pandas numpy scipy scikit-learn sdv ctgan torch pyyaml imbalanced-learn
-```
-
-Key dependencies:
-
-| Library | Purpose |
-|---|---|
-| `sdv` / `ctgan` | CTGAN & TVAE models |
-| `torch` | KDE-Copula GAN & Diffusion Model |
-| `scipy` | KS tests, Wasserstein distance |
-| `scikit-learn` | Preprocessing, KNN imputation |
-| `pyyaml` | Model configuration |
-
----
-
-## Citation / Context
-
-This project is part of a research study evaluating synthetic tabular data generation methods for geotechnical laterite datasets with limited sample sizes. The KDE-Copula GAN model is a custom architecture designed to better preserve the marginal distributions and inter-feature correlations characteristic of geotechnical data.
-#   l a t e r i t e _ s y n t h e t i c - _ d a t a 
+See [`report_of_laterite.md`](report_of_laterite.md) for the full analysis.
